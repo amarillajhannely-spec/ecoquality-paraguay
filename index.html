@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoQuality Paraguay | Certificaciones ISO en Paraguay</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --steel: #1b3a5c;
+    --gold: #4a9e6b;
+    --gold-light: #6bbf88;
+    --cream: #f4f0e8;
+    --white: #ffffff;
+    --gray: #8a9bb0;
+    --light-bg: #f8f6f1;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 5%;
+    background: rgba(13,27,42,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    transition: all 0.3s;
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--white);
+  }
+  .logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    color: var(--cream); text-decoration: none;
+    font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
+    font-weight: 400; opacity: 0.85; transition: opacity 0.2s, color 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: var(--navy) !important;
+    padding: 0.55rem 1.4rem; border-radius: 2px;
+    font-weight: 500 !important; opacity: 1 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 5%;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(27,58,92,0.5) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      linear-gradient(160deg, #0d1b2a 0%, #112233 50%, #0d1b2a 100%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: 
+      linear-gradient(var(--gold) 1px, transparent 1px),
+      linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; max-width: 760px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid rgba(201,168,76,0.4);
+    padding: 0.4rem 1rem; border-radius: 2px; margin-bottom: 2rem;
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge::before { content: '◆'; font-size: 0.5rem; }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 6vw, 5.2rem);
+    font-weight: 300; line-height: 1.08;
+    color: var(--white); margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 em { color: var(--gold); font-style: italic; }
+  .hero p {
+    font-size: 1.05rem; line-height: 1.75; color: var(--gray);
+    max-width: 540px; margin-bottom: 2.5rem;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--gold); color: var(--navy);
+    padding: 0.85rem 2rem; border-radius: 2px;
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-secondary {
+    border: 1px solid rgba(201,168,76,0.4); color: var(--cream);
+    padding: 0.85rem 2rem; border-radius: 2px;
+    font-size: 0.88rem; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-certifications {
+    position: absolute; right: 5%; bottom: 15%;
+    display: flex; flex-direction: column; gap: 1rem;
+    animation: fadeLeft 1s 0.5s ease both;
+  }
+  .cert-pill {
+    background: rgba(27,58,92,0.6); border: 1px solid rgba(201,168,76,0.3);
+    backdrop-filter: blur(8px); border-radius: 4px;
+    padding: 0.7rem 1.4rem; text-align: center;
+  }
+  .cert-pill strong {
+    display: block; font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; color: var(--gold); font-weight: 600;
+  }
+  .cert-pill span { font-size: 0.72rem; color: var(--gray); letter-spacing: 0.05em; }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    animation: fadeUp 1s 1s ease both;
+  }
+  .scroll-line {
+    width: 1px; height: 40px; background: linear-gradient(var(--gold), transparent);
+    animation: scrollAnim 2s ease infinite;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--steel);
+    border-top: 1px solid rgba(201,168,76,0.2);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding: 2.5rem 5%;
+    display: flex; justify-content: center; gap: 5rem; flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat strong {
+    display: block; font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 600; color: var(--gold);
+  }
+  .stat span { font-size: 0.8rem; color: var(--gray); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* SECTION STYLES */
+  section { padding: 7rem 5%; }
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-label::before { content: ''; display: block; width: 30px; height: 1px; background: var(--gold); }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300; line-height: 1.15; color: var(--white);
+    margin-bottom: 1.2rem;
+  }
+  .section-title em { color: var(--gold); font-style: italic; }
+  .section-subtitle { color: var(--gray); line-height: 1.75; max-width: 580px; }
+
+  /* ABOUT */
+  .about { background: #0a1520; }
+  .about-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-card {
+    background: var(--steel); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px; padding: 2rem;
+  }
+  .about-card-accent {
+    position: absolute; bottom: -1.5rem; right: -1.5rem;
+    background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 4px; padding: 1.5rem 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--gold-light);
+  }
+  .about-list { margin-top: 2rem; }
+  .about-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .about-item:last-child { border-bottom: none; }
+  .about-icon {
+    width: 36px; height: 36px; min-width: 36px;
+    background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 1rem;
+  }
+  .about-item-text strong { display: block; color: var(--white); margin-bottom: 0.2rem; font-size: 0.9rem; }
+  .about-item-text span { color: var(--gray); font-size: 0.82rem; line-height: 1.5; }
+
+  /* SERVICES */
+  .services { background: var(--navy); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
+    margin-top: 4rem; background: rgba(201,168,76,0.15); border-radius: 4px; overflow: hidden;
+  }
+  .service-card {
+    background: #0f1e30; padding: 3rem 2.5rem;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--gold); transform: scaleX(0);
+    transform-origin: left; transition: transform 0.4s ease;
+  }
+  .service-card:hover { background: #132030; }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem; font-weight: 300; color: rgba(201,168,76,0.12);
+    line-height: 1; margin-bottom: 1.5rem;
+    transition: color 0.3s;
+  }
+  .service-card:hover .service-number { color: rgba(201,168,76,0.2); }
+  .service-icon {
+    font-size: 1.8rem; margin-bottom: 1rem; display: block;
+  }
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400; color: var(--white);
+    margin-bottom: 0.5rem; line-height: 1.25;
+  }
+  .service-subtitle {
+    font-size: 0.75rem; color: var(--gold); letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 1.2rem;
+  }
+  .service-card p { color: var(--gray); font-size: 0.88rem; line-height: 1.75; margin-bottom: 1.5rem; }
+  .service-features { list-style: none; }
+  .service-features li {
+    font-size: 0.82rem; color: var(--gray); padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .service-features li::before { content: '—'; color: var(--gold); font-size: 0.7rem; }
+
+  /* PROCESS */
+  .process { background: #0a1520; }
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 4rem;
+    position: relative;
+  }
+  .process-steps::before {
+    content: ''; position: absolute; top: 2rem; left: 12.5%; right: 12.5%;
+    height: 1px; background: linear-gradient(90deg, var(--gold), rgba(201,168,76,0.2), var(--gold));
+  }
+  .process-step { text-align: center; padding: 0 1.5rem; }
+  .step-dot {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--navy); border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; color: var(--gold); font-weight: 600;
+  }
+  .process-step h4 { color: var(--white); font-size: 0.95rem; margin-bottom: 0.6rem; }
+  .process-step p { color: var(--gray); font-size: 0.8rem; line-height: 1.65; }
+
+  /* COVERAGE */
+  .coverage { background: var(--navy); text-align: center; }
+  .coverage-inner { max-width: 700px; margin: 0 auto; }
+  .coverage-map {
+    margin: 3rem auto; max-width: 480px;
+    background: rgba(27,58,92,0.3); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px; padding: 3rem; position: relative; overflow: hidden;
+  }
+  .coverage-map::before {
+    content: '🗺️'; font-size: 6rem; display: block; margin-bottom: 1.5rem;
+    filter: grayscale(0.5);
+  }
+  .coverage-map h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; color: var(--white); margin-bottom: 0.5rem;
+  }
+  .coverage-map p { color: var(--gray); font-size: 0.9rem; }
+  .regions {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-top: 2rem;
+  }
+  .region-tag {
+    border: 1px solid rgba(201,168,76,0.3); padding: 0.3rem 0.9rem;
+    border-radius: 2px; font-size: 0.75rem; color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  /* CONTACT */
+  .contact { background: #0a1520; }
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
+  }
+  .contact-info { }
+  .contact-methods { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.2rem; }
+  .contact-method {
+    display: flex; align-items: center; gap: 1.2rem;
+    padding: 1.2rem 1.5rem;
+    background: rgba(27,58,92,0.3); border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px; text-decoration: none; color: inherit;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .contact-method:hover { border-color: rgba(201,168,76,0.4); background: rgba(27,58,92,0.5); }
+  .contact-method-icon {
+    width: 44px; height: 44px; min-width: 44px; border-radius: 3px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+  }
+  .icon-wa { background: #25D366; }
+  .icon-mail { background: rgba(201,168,76,0.2); color: var(--gold); }
+  .contact-method-text strong {
+    display: block; font-size: 0.88rem; color: var(--white); margin-bottom: 0.15rem;
+  }
+  .contact-method-text span { font-size: 0.8rem; color: var(--gray); }
+
+  .contact-form {
+    background: rgba(27,58,92,0.2); border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px; padding: 2.5rem;
+  }
+  .form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--white); margin-bottom: 1.5rem;
+  }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label {
+    display: block; font-size: 0.75rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--gray); margin-bottom: 0.5rem;
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; background: rgba(13,27,42,0.8);
+    border: 1px solid rgba(201,168,76,0.2); border-radius: 2px;
+    padding: 0.75rem 1rem; color: var(--cream); font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem; outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--gold);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-group select option { background: var(--navy); }
+  .form-submit {
+    width: 100%; background: var(--gold); color: var(--navy);
+    border: none; padding: 0.9rem; border-radius: 2px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-weight: 500;
+    font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .form-submit:hover { background: var(--gold-light); }
+
+  /* FOOTER */
+  footer {
+    background: #060f18; border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 3rem 5%; text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; color: var(--white); margin-bottom: 0.5rem;
+  }
+  .footer-logo span { color: var(--gold); }
+  footer p { color: var(--gray); font-size: 0.8rem; line-height: 1.8; }
+  .footer-divider {
+    width: 40px; height: 1px; background: var(--gold);
+    margin: 1.5rem auto;
+  }
+  .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .footer-links a { color: var(--gray); font-size: 0.8rem; text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* WHATSAPP FLOAT */
+  .wa-float {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+    width: 58px; height: 58px; background: #25D366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+    text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    animation: pulse 3s ease infinite;
+  }
+  .wa-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(37,211,102,0.6);
+  }
+  .wa-float svg { width: 28px; height: 28px; fill: white; }
+  .wa-tooltip {
+    position: absolute; right: 70px; background: var(--navy);
+    border: 1px solid rgba(201,168,76,0.3); border-radius: 4px;
+    padding: 0.5rem 0.9rem; white-space: nowrap;
+    font-size: 0.78rem; color: var(--cream); pointer-events: none;
+    opacity: 0; transform: translateX(10px); transition: all 0.2s;
+  }
+  .wa-float:hover .wa-tooltip { opacity: 1; transform: translateX(0); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes scrollAnim {
+    0%, 100% { opacity: 1; } 50% { opacity: 0.2; }
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 4px 24px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 4px 32px rgba(37,211,102,0.65); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .process-steps::before { display: none; }
+    .hero-certifications { display: none; }
+  }
+  @media (max-width: 640px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr; }
+    .stats-bar { gap: 2.5rem; }
+    nav { padding: 1rem 4%; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">EcoQuality <span>Paraguay</span></div>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#cobertura">Cobertura</a></li>
+    <li><a href="#contacto" class="nav-cta">Contactar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Consultoría Industrial · Paraguay</div>
+    <h1>Excelencia operativa con <em>estándares ISO</em></h1>
+    <p>Acompañamos a empresas del sector industrial en el interior del Paraguay hacia la certificación y mejora continua. Soluciones adaptadas a su realidad, con experiencia probada.</p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/595976794253" class="btn-primary" target="_blank">
+        Consulta gratuita
+      </a>
+      <a href="#servicios" class="btn-secondary">Ver servicios</a>
+    </div>
+  </div>
+  <div class="hero-certifications">
+    <div class="cert-pill">
+      <strong>ISO 9001</strong>
+      <span>Gestión de Calidad</span>
+    </div>
+    <div class="cert-pill">
+      <strong>ISO 14001</strong>
+      <span>Gestión Ambiental</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <strong>ISO 9001</strong>
+    <span>Calidad Certificada</span>
+  </div>
+  <div class="stat">
+    <strong>ISO 14001</strong>
+    <span>Medio Ambiente</span>
+  </div>
+  <div class="stat">
+    <strong>100%</strong>
+    <span>Empresas Locales</span>
+  </div>
+  <div class="stat">
+    <strong>Interior</strong>
+    <span>Todo el País</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="nosotros">
+  <div class="about-inner">
+    <div>
+      <div class="section-label">Quiénes somos</div>
+      <h2 class="section-title">Consultores especializados en <em>Industria Paraguaya</em></h2>
+      <p class="section-subtitle">
+        Somos un equipo de consultores con profundo conocimiento del tejido industrial del Paraguay. Entendemos los desafíos únicos que enfrentan las empresas del interior y diseñamos soluciones prácticas que generan resultados reales.
+      </p>
+      <div class="about-list">
+        <div class="about-item">
+          <div class="about-icon">🎯</div>
+          <div class="about-item-text">
+            <strong>Enfoque práctico y local</strong>
+            <span>Metodologías adaptadas a la realidad del sector industrial paraguayo, sin tecnicismos innecesarios.</span>
+          </div>
+        </div>
+        <div class="about-item">
+          <div class="about-icon">🔧</div>
+          <div class="about-item-text">
+            <strong>Acompañamiento integral</strong>
+            <span>Desde el diagnóstico inicial hasta la obtención del certificado y el mantenimiento del sistema.</span>
+          </div>
+        </div>
+        <div class="about-item">
+          <div class="about-icon">📍</div>
+          <div class="about-item-text">
+            <strong>Presencia en el interior</strong>
+            <span>Atendemos empresas en todos los departamentos del interior del Paraguay con visitas presenciales.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-card">
+        <p style="color: var(--gray); font-size: 0.9rem; line-height: 1.8; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--cream);">
+          "La calidad no es un acto, es un hábito. Ayudamos a las empresas paraguayas a construir sistemas de gestión que perduran y generan valor real."
+        </p>
+        <div style="margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid rgba(201,168,76,0.2);">
+          <strong style="color: var(--gold); font-size: 0.85rem;">EcoQuality Paraguay</strong>
+          <span style="display: block; color: var(--gray); font-size: 0.78rem; margin-top: 0.2rem;">EcoQuality Paraguay</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="servicios">
+  <div class="section-label">Nuestros servicios</div>
+  <h2 class="section-title">Tres niveles de <em>servicio profesional</em></h2>
+  <p class="section-subtitle">Ofrecemos una propuesta completa que cubre todo el ciclo de la gestión de calidad y ambiente, adaptada a las necesidades y madurez de cada organización.</p>
+
+  <div class="services-grid">
+    <!-- Servicio 1 -->
+    <div class="service-card">
+      <div class="service-number">01</div>
+      <span class="service-icon">🏆</span>
+      <h3>Preparación e Implementación para la Certificación</h3>
+      <div class="service-subtitle">ISO 9001 · ISO 14001</div>
+      <p>Guiamos a su empresa desde cero hasta la obtención del certificado ISO. Cubrimos todo el ciclo: diagnóstico, planificación, implementación, auditoría interna y preparación para la certificadora.</p>
+      <ul class="service-features">
+        <li>Diagnóstico GAP inicial del sistema</li>
+        <li>Diseño del Sistema de Gestión</li>
+        <li>Implementación documentada</li>
+        <li>Auditoría interna previa</li>
+        <li>Acompañamiento ante certificadora</li>
+        <li>Planes de acción y mejora</li>
+      </ul>
+    </div>
+
+    <!-- Servicio 2 -->
+    <div class="service-card">
+      <div class="service-number">02</div>
+      <span class="service-icon">⚙️</span>
+      <h3>Mejora y Organización por Departamentos</h3>
+      <div class="service-subtitle">Gestión Interna · Procesos</div>
+      <p>Fortalecemos la estructura interna de su organización mediante la creación y mejora de toda la documentación operativa necesaria para alcanzar la excelencia en cada área.</p>
+      <ul class="service-features">
+        <li>Elaboración de instructivos operativos</li>
+        <li>Diseño de procedimientos documentados</li>
+        <li>Creación de formularios y registros</li>
+        <li>Objetivos de calidad y KPIs</li>
+        <li>Planificación estratégica</li>
+        <li>Mapeo y análisis de procesos</li>
+      </ul>
+    </div>
+
+    <!-- Servicio 3 -->
+    <div class="service-card">
+      <div class="service-number">03</div>
+      <span class="service-icon">🎓</span>
+      <h3>Capacitación y Formación Especializada</h3>
+      <div class="service-subtitle">Talleres · Formación · Equipos</div>
+      <p>Empoderamos a su equipo humano con el conocimiento necesario para sostener, mantener y mejorar el sistema de gestión de forma autónoma y eficiente en el tiempo.</p>
+      <ul class="service-features">
+        <li>Formación en normas ISO 9001 y 14001</li>
+        <li>Talleres de auditor interno</li>
+        <li>Capacitación en gestión documental</li>
+        <li>Formación para líderes de proceso</li>
+        <li>Sensibilización del personal</li>
+        <li>Capacitación en planta / en sede</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="proceso">
+  <div style="text-align: center; max-width: 600px; margin: 0 auto 1rem;">
+    <div class="section-label" style="justify-content: center;">Cómo trabajamos</div>
+    <h2 class="section-title">Un proceso <em>estructurado</em> y probado</h2>
+    <p class="section-subtitle" style="margin: 0 auto;">Nuestra metodología garantiza resultados medibles en cada etapa del camino hacia la certificación.</p>
+  </div>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-dot">1</div>
+      <h4>Diagnóstico</h4>
+      <p>Evaluamos la situación actual de la empresa frente a los requisitos de la norma ISO aplicable.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-dot">2</div>
+      <h4>Planificación</h4>
+      <p>Diseñamos un plan de trabajo personalizado con cronograma, responsables y recursos necesarios.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-dot">3</div>
+      <h4>Implementación</h4>
+      <p>Acompañamos la ejecución de cada etapa del sistema, documentando y capacitando al equipo.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-dot">4</div>
+      <h4>Certificación</h4>
+      <p>Preparamos y acompañamos la auditoría de certificación hasta la obtención del certificado ISO.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COVERAGE -->
+<section class="coverage" id="cobertura">
+  <div class="coverage-inner">
+    <div class="section-label" style="justify-content: center;">Cobertura geográfica</div>
+    <h2 class="section-title">Atendemos todo el <em>interior del Paraguay</em></h2>
+    <p class="section-subtitle" style="margin: 0 auto;">Nuestra consultoría está especialmente orientada a empresas industriales ubicadas fuera de la capital, donde la oferta de servicios especializados es escasa. Nos desplazamos donde usted nos necesita.</p>
+    <div class="coverage-map">
+      <h3>Paraguay Interior</h3>
+      <p>Atención presencial en todos los departamentos del interior del país</p>
+      <div class="regions">
+        <span class="region-tag">Concepción</span>
+        <span class="region-tag">San Pedro</span>
+        <span class="region-tag">Cordillera</span>
+        <span class="region-tag">Guairá</span>
+        <span class="region-tag">Caaguazú</span>
+        <span class="region-tag">Caazapá</span>
+        <span class="region-tag">Itapúa</span>
+        <span class="region-tag">Misiones</span>
+        <span class="region-tag">Paraguarí</span>
+        <span class="region-tag">Alto Paraná</span>
+        <span class="region-tag">Central</span>
+        <span class="region-tag">Ñeembucú</span>
+        <span class="region-tag">Amambay</span>
+        <span class="region-tag">Canindeyú</span>
+        <span class="region-tag">Presidente Hayes</span>
+        <span class="region-tag">Alto Paraguay</span>
+        <span class="region-tag">Boquerón</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contacto">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="section-label">Contáctenos</div>
+      <h2 class="section-title">Hablemos sobre su <em>proyecto</em></h2>
+      <p class="section-subtitle">Estamos disponibles para responder sus consultas y diseñar una propuesta a medida para su empresa. El primer contacto es sin compromiso.</p>
+      <div class="contact-methods">
+        <a href="https://wa.me/595976794253" class="contact-method" target="_blank">
+          <div class="contact-method-icon icon-wa">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="22" height="22">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+          </div>
+          <div class="contact-method-text">
+            <strong>WhatsApp Directo</strong>
+            <span>0976 794 253 · Respuesta rápida</span>
+          </div>
+        </a>
+        <a href="mailto:contacto@ecoqualityparaguay.com.py" class="contact-method">
+          <div class="contact-method-icon icon-mail">✉️</div>
+          <div class="contact-method-text">
+            <strong>Correo Electrónico</strong>
+            <span>contacto@ecoqualityparaguay.com.py</span>
+          </div>
+        </a>
+        <div class="contact-method" style="cursor: default;">
+          <div class="contact-method-icon icon-mail">📞</div>
+          <div class="contact-method-text">
+            <strong>Teléfono / WhatsApp</strong>
+            <span>+595 976 794 253</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <div class="form-title">Solicitar información</div>
+      <div class="form-group">
+        <label>Nombre completo</label>
+        <input type="text" placeholder="Su nombre y apellido">
+      </div>
+      <div class="form-group">
+        <label>Empresa</label>
+        <input type="text" placeholder="Nombre de su empresa">
+      </div>
+      <div class="form-group">
+        <label>Departamento / Ciudad</label>
+        <input type="text" placeholder="Ubicación de su empresa">
+      </div>
+      <div class="form-group">
+        <label>Servicio de interés</label>
+        <select>
+          <option value="">Seleccione un servicio...</option>
+          <option>Certificación ISO 9001</option>
+          <option>Certificación ISO 14001</option>
+          <option>Mejora departamental y documentación</option>
+          <option>Capacitación y formación</option>
+          <option>Paquete integral (varios servicios)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mensaje</label>
+        <textarea placeholder="Cuéntenos brevemente sobre su empresa y sus necesidades..."></textarea>
+      </div>
+      <button class="form-submit" onclick="window.open('https://wa.me/595976794253?text=Hola,%20quisiera%20solicitar%20información%20sobre%20sus%20servicios%20de%20consultoría%20ISO.', '_blank')">
+        Enviar consulta por WhatsApp
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">EcoQuality <span>Paraguay</span></div>
+  <div class="footer-divider"></div>
+  <p>
+    EcoQuality Paraguay — Sistemas de Gestión ISO 9001 e ISO 14001<br>
+    para empresas industriales del interior del Paraguay
+  </p>
+  <div class="footer-links">
+    <a href="#inicio">Inicio</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#cobertura">Cobertura</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <p style="margin-top: 2rem; font-size: 0.72rem; opacity: 0.5;">
+    © 2025 EcoQuality Paraguay · Todos los derechos reservados<br>
+    contacto@ecoqualityparaguay.com.py · +595 976 794 253
+  </p>
+</footer>
+
+<!-- WHATSAPP FLOAT BUTTON -->
+<a href="https://wa.me/595976794253?text=Hola,%20quisiera%20consultar%20sobre%20sus%20servicios%20de%20certificación%20ISO." class="wa-float" target="_blank">
+  <div class="wa-tooltip">Consulta gratuita ahora</div>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+</body>
+</html>
